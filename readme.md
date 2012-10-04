@@ -1,6 +1,6 @@
 # Code from Computing Data Analisys
 
-![cover](https://github.com/bossiernesto/Rcourse/blob/master/cover.jpg)  
+![cover](https://github.com/bossiernesto/Rcourse/raw/master/cover.jpg)  
 
 This is currently the code im developing for the couse at [cousera](https://class.coursera.org/compdata-2012-001/wiki/view?page=syllabus) 
 
