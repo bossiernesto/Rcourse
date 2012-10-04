@@ -1,7 +1,13 @@
 # Code from Computing Data Analisys
 
 
-<div style="float: center"><img src="https://s3.amazonaws.com/coursera/topics/compdata/small-icon.hover.png" /></div>
+{:.center}
+![cardinal](https://s3.amazonaws.com/coursera/topics/compdata/small-icon.hover.png)  
+Coursera image
+.center {
+  text-align: center;
+}
+
 
 This is currently the code im developing for the couse at [cousera](https://class.coursera.org/compdata-2012-001/wiki/view?page=syllabus) 
 
