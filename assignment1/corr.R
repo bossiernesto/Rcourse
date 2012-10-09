@@ -16,7 +16,7 @@ corr <- function(directory, threshold = 0) {
   formatMonitor <-function(i,directory) subset(getmonitor(i,directory),sulfate!="NA" & nitrate!="NA",select=c(sulfate,nitrate))
   
   for(i in monitorsToCorr){
-      monitor<-formatMonitor(i,dir)
+      monitor<-formatMonitor(i,directory)
       vec<-c(vec,cor(monitor)[2])
   }
 
