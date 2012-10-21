@@ -4,3 +4,4 @@
 # Example code in package build process
 *-Ex.R
 .Rproj.user
+/assigment2/*.csv
