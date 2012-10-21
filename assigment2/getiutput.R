@@ -7,9 +7,10 @@ if(!is.installed("digest"))
 if(!is.installed("RCurl"))
   install.packages("RCurl")
 
+unzip('ProgAssigment2-data.zip')
+
 source("http://spark-public.s3.amazonaws.com/compdata/scripts/submitscript.R")
 
 #Uncomment this when the package works
-#submit()
+submit()
 
-unzip('ProgAssigment2-data.zip')
