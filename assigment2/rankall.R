@@ -15,9 +15,10 @@ rankall <- function(outcome,num = "best"){
   
   data=read.csv("outcome-of-care-measures.csv",colClasses="character")
   
-  data[,11]=suppressWarnings(as.numeric(as.character(data[,11])))
-  data[,17]=suppressWarnings(as.numeric(as.character(data[,17])))
-  data[,23]=suppressWarnings(as.numeric(as.character(data[,23])))
+  for(i in outcome_columns){
+  data[,i]=suppressWarnings(as.numeric(as.character(data[,i])))
+  }
+  data$State <- factor(data$State)
   # outcome index and outcome t_data
   idx=outcome_columns[outcome]
   
