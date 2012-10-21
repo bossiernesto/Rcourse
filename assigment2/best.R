@@ -12,7 +12,7 @@ best <- function(state, outcome) {
     stop("invalid outcome")}
   
   ## Read outcome data
-  setwd("~/workspacehelios/RCourse/assigment2")#you should specify your own working directory
+  #setwd("~/workspacehelios/RCourse/assigment2")#you should specify your own working directory
   data=read.csv("outcome-of-care-measures.csv",colClasses="character")  
   ## Check that state and outcome are valid
   str_states <- data$State
