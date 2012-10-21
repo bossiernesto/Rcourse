@@ -12,7 +12,7 @@ rankall <- function(outcome,num = "best"){
   #check if outcome is valid
   if (!outcome %in% outcomes){
     stop("invalid outcome")}
-  
+  #
   data=read.csv("outcome-of-care-measures.csv",colClasses="character")
   
   for(i in outcome_columns){
