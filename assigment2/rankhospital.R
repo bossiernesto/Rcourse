@@ -6,7 +6,7 @@ rankhospital <- function(state,outcome,num = "best"){
   outcomes=c('heart attack','heart disease','pneumonia')
   
   #build dictionary for column name and outcome
-  outcome_columns=c(11,17,18)
+  outcome_columns=c(11,17,23)
   names(outcome_columns)=outcomes
   
   if (!outcome %in% outcomes){
@@ -15,13 +15,13 @@ rankhospital <- function(state,outcome,num = "best"){
   ## Read outcome data
   setwd("~/workspacehelios/RCourse/assigment2")#you should specify your own working directory
   data = read.csv("outcome-of-care-measures.csv",colClasses="character")
-  
+  str_states <- data$State
   if (!state %in% str_states)  stop("Invalid state") 
   
   #Prepare data  
-  data[,11] <- suppressWarnings(as.numeric(data[,11]))
-  data[,17] <- suppressWarnings(as.numeric(data[,17]))
-  data[,23] <- suppressWarnings(as.numeric(data[,23]))
+  data[,11] <- suppressWarnings(as.numeric(as.character(data[,11])))
+  data[,17] <- suppressWarnings(as.numeric(as.character(data[,17])))
+  data[,23] <- suppressWarnings(as.numeric(as.character(data[,23])))
   data$State <- factor(data$State)
 
   # clean up NA
@@ -36,7 +36,6 @@ rankhospital <- function(state,outcome,num = "best"){
     
     max = which.max(data)
     if (num == "best") {
-      
       return(which.min(data))
     }else if (num == 'worst'){
       return(max)
