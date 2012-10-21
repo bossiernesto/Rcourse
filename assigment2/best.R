@@ -4,7 +4,7 @@ best <- function(state, outcome) {
   outcomes=c('heart attack','heart disease','pneumonia')
   
   #build dictionary for column name and outcome
-  outcome_columns=c(11,17,18)
+  outcome_columns=c(11,17,23)
   names(outcome_columns)=outcomes
   
   #check if outcome is valid
@@ -21,9 +21,9 @@ best <- function(state, outcome) {
   }
   
   #Prepare data  
-  data[,11] <- suppressWarnings(as.numeric(data[,11]))
-  data[,17] <- suppressWarnings(as.numeric(data[,17]))
-  data[,23] <- suppressWarnings(as.numeric(data[,23]))
+  data[,11] <- suppressWarnings(as.numeric(as.character(data[,11])))
+  data[,17] <- suppressWarnings(as.numeric(as.character(data[,17])))
+  data[,23] <- suppressWarnings(as.numeric(as.character(data[,23])))
   data$State <- factor(data$State)
   
   data = data[data$State == state,]
