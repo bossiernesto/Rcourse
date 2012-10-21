@@ -15,17 +15,18 @@ rankall <- function(outcome,num = "best"){
   
   data=read.csv("outcome-of-care-measures.csv",colClasses="character")
   
-  data[,11]=suppressWarnings(as.numeric(as.character(data[,11])))
-  data[,17]=suppressWarnings(as.numeric(as.character(data[,17])))
-  data[,23]=suppressWarnings(as.numeric(as.character(data[,23])))
-  # outcome index and outcome t_data
+  for(i in outcome_columns){
+  data[,i]=suppressWarnings(as.numeric(as.character(data[,i])))
+  }
+  data$State <- factor(data$State)
+  # outcome index and outcome data
   idx=outcome_columns[outcome]
   
-  t_data=data[!is.na(data[,idx]),c(2,7,idx)]
-  names(t_data)=c("hospital","state","rate")
+  data=data[!is.na(data[,idx]),c(2,7,idx)]
+  names(data)=c("hospital","state","rate")
   
   # 
-  rank_val=tapply(t_data[,"rate"],t_data$state,FUN=function(x,num) {
+  rank_val=tapply(data[,"rate"],data$state,FUN=function(x,num) {
     
     if (num == "best") {
       #print(which.min(x))
@@ -58,13 +59,13 @@ rankall <- function(outcome,num = "best"){
     rate=rank_val[[i]]
     
     if (num == "best" || num == "worst") {
-      ret=rbind(ret, t_data[t_data$state == st & t_data$rate == rate,])
+      ret=rbind(ret, data[data$state == st & data$rate == rate,])
       
     }else{
       
       if(!is.na(rate)){
         
-        tmp=t_data[t_data$state==st & t_data$rate <= rate,]
+        tmp=data[data$state==st & data$rate <= rate,]
         ret=rbind(ret, tmp[order(tmp$rate,tmp$hospital),])
       }
     }
