@@ -32,9 +32,9 @@ getData <- function(state){
 
 prepareData <- function(data){
   #Prepare data  
-  data[,11] <- suppressWarnings(as.numeric(as.character(data[,11])))
-  data[,17] <- suppressWarnings(as.numeric(as.character(data[,17])))
-  data[,23] <- suppressWarnings(as.numeric(as.character(data[,23])))
+  for(i in getOutcomes()){
+    data[,i] <- suppressWarnings(as.numeric(as.character(data[,i])))
+  }
   data$State <- factor(data$State)
   return(data)
 }
