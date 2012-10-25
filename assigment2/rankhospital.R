@@ -1,32 +1,18 @@
+source("./utils.R",local=TRUE)
+
 rankhospital <- function(state,outcome,num = "best"){
   
+  outcomes=getOutcomes()
   #build common functions
-  outcome=tolower(outcome)
+  idx=getIdx(outcome)
   
-  outcomes=c('heart attack','heart disease','pneumonia')
-  
-  #build dictionary for column name and outcome
-  outcome_columns=c(11,17,23)
-  names(outcome_columns)=outcomes
-  
-  if (!outcome %in% outcomes){
-    stop("invalid outcome")
-    }
   ## Read outcome data
   #setwd("~/workspacehelios/RCourse/assigment2")#you should specify your own working directory
-  data = read.csv("outcome-of-care-measures.csv",colClasses="character")
-  str_states <- data$State
-  if (!state %in% str_states)  stop("Invalid state") 
-  
+  data = getData(state)
   #Prepare data  
-  data[,11] <- suppressWarnings(as.numeric(as.character(data[,11])))
-  data[,17] <- suppressWarnings(as.numeric(as.character(data[,17])))
-  data[,23] <- suppressWarnings(as.numeric(as.character(data[,23])))
-  data$State <- factor(data$State)
-
+  data=prepareData(data)
   # clean up NA
-  cc = complete.cases(data)
-  data = data[cc,]
+  data=cleanNA(data)
   
   # data for the state
   t_data = data[data$State == state,]
@@ -47,8 +33,6 @@ rankhospital <- function(state,outcome,num = "best"){
       return(NA)
     return(rank)
   }
-  
-  idx=outcome_columns[outcome]
   
   t_data = t_data[with(t_data,order(t_data[,idx],t_data[,2])),]
   rank = checkRank(num,t_data[,idx])

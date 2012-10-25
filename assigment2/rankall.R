@@ -1,26 +1,19 @@
+source("./utils.R",local=TRUE)
+
 rankall <- function(outcome,num = "best"){
   
   #build common functions
   outcome=tolower(outcome)
+  outcomes=getOutcomes()
   
-  outcomes=c('heart attack','pneumonia','heart failure')
+  ## Read outcome data
+  data=getData(state)
   
-  #build dictionary for column name and outcome
-  outcome_columns=c(11,23,17)
-  names(outcome_columns)=outcomes
+  #Prepare data  
+  data=prepareData(data)
   
-  #check if outcome is valid
-  if (!outcome %in% outcomes){
-    stop("invalid outcome")}
-  #
-  data=read.csv("outcome-of-care-measures.csv",colClasses="character")
-  
-  for(i in outcome_columns){
-  data[,i]=suppressWarnings(as.numeric(as.character(data[,i])))
-  }
-  data$State <- factor(data$State)
   # outcome index and outcome data
-  idx=outcome_columns[outcome]
+  idx=getIdx(outcome)
   
   data=data[!is.na(data[,idx]),c(2,7,idx)]
   names(data)=c("hospital","state","rate")
